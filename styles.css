@@ -1,0 +1,100 @@
+/* CBZ Reader View Styles */
+.cbz-reader-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--background-primary);
+}
+
+.cbz-main-view {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cbz-minimap {
+    width: 120px;
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--background-secondary);
+    border-left: 1px solid var(--background-modifier-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 0;
+    scrollbar-width: none; 
+    position: relative; /* Added for thumb positioning */
+}
+.cbz-minimap::-webkit-scrollbar {
+    display: none;
+}
+
+.cbz-minimap-thumb {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.2);
+    border: 1px solid var(--interactive-accent);
+    pointer-events: auto;
+    cursor: grab;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.cbz-minimap-thumb:active {
+    cursor: grabbing;
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.cbz-page-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    min-height: 800px; /* Default height for lazy loading placeholder */
+}
+
+.cbz-page-container img {
+    max-width: 100%;
+    object-fit: contain;
+    /* Default height will match the natural height of the image once loaded */
+    height: auto; 
+}
+
+.cbz-minimap-item {
+    width: 100px;
+    min-height: 140px; /* Approximate thumbnail height */
+    margin-bottom: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--background-primary);
+    opacity: 0.6;
+    transition: opacity 0.2s, border-color 0.2s;
+}
+
+.cbz-minimap-item:hover {
+    opacity: 0.9;
+    border-color: var(--text-muted);
+}
+
+.cbz-minimap-item.is-active {
+    opacity: 1;
+    border-color: var(--interactive-accent);
+}
+
+.cbz-minimap-item canvas {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+

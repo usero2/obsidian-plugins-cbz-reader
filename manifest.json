@@ -1,0 +1,13 @@
+{
+  "id": "cbz-reader",
+  "name": "CBZ Reader",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Read CBZ files",
+  "author": "usero2-endofday",
+	"authorUrl": "https://github.com/usero2",
+	"fundingUrl": {
+	  "Buy me a Coffee": "https://buymeacoffee.com/endofday"
+	},
+	"isDesktopOnly": false
+}
