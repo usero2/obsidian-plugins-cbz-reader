@@ -42,8 +42,9 @@ Enjoy native smooth scrolling when navigating pages or clicking the minimap, pro
 3. Place the downloaded files into that folder.
 4. Reload Obsidian and enable the plugin in the settings.
 
-## 🆕 What's New in v1.0.2
+## 🆕 What's New in v1.0.3
 
+- **Strict CSP Compliance:** Fixed a security warning by ensuring no dynamic <script> elements are created by the JSZip dependency, fully aligning with Obsidian's plugin safety guidelines.
 - **Perfect 0-Latency Minimap Dragging:** Completely rebuilt the Minimap slider tracking. The slider now perfectly follows your mouse with 0 delay or jitter.
 - **VS Code-Style Auto-Scrolling:** When dragging the slider on a long comic, the minimap track now smoothly auto-scrolls in the opposite direction, allowing you to reach the very bottom of the document without running out of screen space.
 - **Stable Slider Size:** Fixed an issue where the slider height would abruptly expand on double-page spreads. The slider height is now beautifully consistent.
@@ -60,4 +61,5 @@ https://buymeacoffee.com/endofday
 <a href="https://www.buymeacoffee.com/endofday" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 ---
 **Built with ❤️ for the Obsidian Community**
+
 
