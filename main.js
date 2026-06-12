@@ -119,8 +119,10 @@ class CbzView extends ItemView {
             const exactPosition = p * maxThumbTop;
             
             // Update UI instantly
-            minimapThumb.style.top = exactPosition + 'px';
-            minimapThumb.style.height = tHeight + 'px';
+            minimapThumb.setCssStyles({
+                top: exactPosition + 'px',
+                height: tHeight + 'px'
+            });
             minimapView.scrollTop = exactPosition - yScreen;
             
             // Map exactPosition back to targetIndex and percentage for mainView
@@ -148,7 +150,7 @@ class CbzView extends ItemView {
         const onMouseUp = () => {
             if (isDown) {
                 isDown = false;
-                minimapThumb.style.cursor = '';
+                minimapThumb.setCssStyles({ cursor: '' });
                 setTimeout(() => { isDraggingThumb = false; }, 50);
             }
             document.removeEventListener('mousemove', onMouseMove);
@@ -167,7 +169,7 @@ class CbzView extends ItemView {
             const parentRect = minimapView.getBoundingClientRect();
             startYScreen = rect.top - parentRect.top;
             
-            minimapThumb.style.cursor = 'grabbing';
+            minimapThumb.setCssStyles({ cursor: 'grabbing' });
             
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
@@ -301,8 +303,10 @@ class CbzView extends ItemView {
                 
                 const exactPosition = parseInt(indexStr) * currentItemHeight + (percentage * currentItemHeight);
                 const tHeight = updateThumbHeight();
-                minimapThumb.style.height = tHeight + 'px';
-                minimapThumb.style.top = exactPosition + 'px';
+                minimapThumb.setCssStyles({
+                    height: tHeight + 'px',
+                    top: exactPosition + 'px'
+                });
                 
                 const trackContentHeight = Math.max(minimapView.scrollHeight, (this.imageFiles ? this.imageFiles.length : 0) * currentItemHeight);
                 const trackViewHeight = minimapView.clientHeight;
@@ -432,7 +436,7 @@ class CbzView extends ItemView {
             img.src = url;
             
             if (img.parentElement) {
-                img.parentElement.style.minHeight = 'auto';
+                img.parentElement.setCssStyles({ minHeight: 'auto' });
             }
         } catch (err) {
             console.error(`Failed to load image at index ${index}`, err);
@@ -446,7 +450,7 @@ class CbzView extends ItemView {
             URL.revokeObjectURL(url);
             img.removeAttribute("src");
             if (img.parentElement) {
-                img.parentElement.style.minHeight = `${img.height || 800}px`; 
+                img.parentElement.setCssStyles({ minHeight: `${img.height || 800}px` }); 
             }
         }
         this.loadedImages.delete(index);
