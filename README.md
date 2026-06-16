@@ -2,7 +2,10 @@
 
 A powerful and fast native CBZ (Comic Book Archive) reader for Obsidian. Read your favorite mangas, comics, and graphic novels directly inside your Obsidian vault with a beautifully crafted, high-performance interface.
 
-![](images/)
+
+![](images/Obsidian_TMmY6ZAHJQ.png)
+![](images/Obsidian_OXUlwf8IZ1.gif)
+
 
 ## ✨ Features
 
