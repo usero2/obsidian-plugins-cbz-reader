@@ -53,6 +53,13 @@ Enjoy native smooth scrolling when navigating pages or clicking the minimap, pro
 - **Stable Slider Size:** Fixed an issue where the slider height would abruptly expand on double-page spreads. The slider height is now beautifully consistent.
 - **Linter Compliance:** Rewrote static styling to use Obsidian's `setCssStyles` API, ensuring full compliance with Obsidian's strict plugin guidelines.
 
+## 🆕 What's New in v1.0.4
+
+- **Context Menu on Images:** Right-click on any image or minimap thumbnail to view the original filename inside the CBZ archive. Word-wrapping is applied for very long filenames.
+- **Copy Image to Clipboard:** Easily copy comic images directly to your clipboard from the new context menu, even if you are clicking from the minimap before the main image has finished loading.
+
+![](images/RuQUO2BG8S.png)
+
 ## ❤️ Support & Donate
 
 If this plugin has improved your Obsidian workflow, saved you time, or you just want to support its continued development, please consider donating! 

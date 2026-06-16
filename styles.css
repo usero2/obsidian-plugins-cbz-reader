@@ -97,4 +97,11 @@
     object-fit: contain;
 }
 
+.cbz-context-menu .menu-item-title {
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-width: 300px;
+}
+
+
 

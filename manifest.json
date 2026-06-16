@@ -1,7 +1,7 @@
 {
   "id": "cbz-reader",
   "name": "CBZ Reader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "minAppVersion": "1.0.0",
   "description": "A powerful and fast native CBZ Comic Book Archive reader",
   "author": "usero2-endofday",

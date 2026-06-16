@@ -17,7 +17,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
 })(module_jszip, module_jszip.exports);
 var JSZip = module_jszip.exports;
-const { Plugin, ItemView } = require('obsidian');
+const { Plugin, ItemView, Menu, Notice } = require('obsidian');
 
 const CBZ_VIEW_TYPE = "cbz-view";
 
@@ -251,6 +251,72 @@ class CbzView extends ItemView {
                 const img = pageContainer.createEl("img");
                 this.imgElements.set(index, img);
                 
+                const handleContextMenu = (event) => {
+                    event.preventDefault();
+                    const menu = new Menu();
+                    menu.dom.addClass('cbz-context-menu');
+                    menu.addItem((item) => {
+                        item.setTitle(zipEntry.name)
+                            .setIcon("image-file")
+                            .setDisabled(true);
+                    });
+                    menu.addSeparator();
+                    menu.addItem((item) => {
+                        item.setTitle("Copy image to clipboard")
+                            .setIcon("copy")
+                            .onClick(async () => {
+                                try {
+                                    if (img.complete && img.naturalWidth > 0) {
+                                        const tmpCanvas = document.createElement("canvas");
+                                        tmpCanvas.width = img.naturalWidth;
+                                        tmpCanvas.height = img.naturalHeight;
+                                        const ctx = tmpCanvas.getContext("2d");
+                                        ctx.drawImage(img, 0, 0);
+                                        tmpCanvas.toBlob((blob) => {
+                                            if (blob) {
+                                                navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).then(() => {
+                                                    new Notice('Image copied to clipboard');
+                                                }).catch((err) => {
+                                                    console.error("Clipboard write error:", err);
+                                                    new Notice('Failed to copy image');
+                                                });
+                                            }
+                                        }, 'image/png');
+                                    } else {
+                                        new Notice('Loading image to copy...');
+                                        const imgData = await zipEntry.async("base64");
+                                        const image = new Image();
+                                        image.onload = () => {
+                                            const tmpCanvas = document.createElement("canvas");
+                                            tmpCanvas.width = image.width;
+                                            tmpCanvas.height = image.height;
+                                            const ctx = tmpCanvas.getContext("2d");
+                                            ctx.drawImage(image, 0, 0);
+                                            tmpCanvas.toBlob((blob) => {
+                                                if (blob) {
+                                                    navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).then(() => {
+                                                        new Notice('Image copied to clipboard');
+                                                    }).catch((err) => {
+                                                        console.error("Clipboard write error:", err);
+                                                        new Notice('Failed to copy image');
+                                                    });
+                                                }
+                                            }, 'image/png');
+                                        };
+                                        image.onerror = () => new Notice('Failed to decode image');
+                                        image.src = "data:image/png;base64," + imgData; 
+                                    }
+                                } catch (e) {
+                                    console.error("Context menu copy error:", e);
+                                    new Notice('Failed to copy image');
+                                }
+                            });
+                    });
+                    menu.showAtMouseEvent(event);
+                };
+
+                img.addEventListener('contextmenu', handleContextMenu);
+
                 this.observer.observe(pageContainer);
 
                 // Minimap items
@@ -259,6 +325,8 @@ class CbzView extends ItemView {
                 const canvas = minimapItem.createEl("canvas");
                 this.canvasElements.set(index, canvas);
                 this.minimapItems.set(index, minimapItem);
+                
+                minimapItem.addEventListener('contextmenu', handleContextMenu);
                 
                 this.minimapObserver.observe(minimapItem);
 
